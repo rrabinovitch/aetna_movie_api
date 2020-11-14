@@ -4,6 +4,7 @@
 - [ ] breaking change
 - [ ] testing
 - [ ] documentation
+- [ ] setup
 
 ### What does this PR do?
 
