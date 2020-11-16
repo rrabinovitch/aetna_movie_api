@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :movie do
     imdbId { "MyText" }
-    title { "" }
+    title { "Movie Title" }
     overview { "MyText" }
     productionCompanies { "MyText" }
     releaseDate { "MyText" }
