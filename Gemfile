@@ -52,3 +52,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'fast_jsonapi'
 gem 'table_print'
 gem 'figaro'
+gem 'will_paginate', '~> 3.1.0'
