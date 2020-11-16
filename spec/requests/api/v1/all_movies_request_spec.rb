@@ -24,4 +24,30 @@ RSpec.describe 'List All Movies' do
     expect(movies_json[:data][0][:attributes]).to have_key(:budget)
     expect(movies_json[:data][0][:attributes][:budget]).to be_an(Integer) # how to test that budget is displayed in dollars?
   end
+
+  it 'Returns 50 movies per page' do
+    movies = create_list(:movie, 55)
+
+    get '/api/v1/movies?page=1'
+    expect(response).to be_successful
+    expect(response.content_type).to eq('application/json; charset=utf-8')
+
+    movies_json = JSON.parse(response.body, symbolize_names: true)
+    expect(movies_json[:data].count).to eq(50)
+    expect(movies_json[:data][0][:attributes][:id]).to eq(movies[0].id)
+    expect(movies_json[:data][49][:attributes][:id]).to eq(movies[49].id)
+  end
+
+  it 'Can accept "page" query params' do
+    movies = create_list(:movie, 175)
+
+    get '/api/v1/movies?page=2'
+    expect(response).to be_successful
+    expect(response.content_type).to eq('application/json; charset=utf-8')
+
+    movies_json = JSON.parse(response.body, symbolize_names: true)
+    expect(movies_json[:data].count).to eq(50)
+    expect(movies_json[:data][0][:attributes][:id]).to eq(movies[50].id)
+    expect(movies_json[:data][49][:attributes][:id]).to eq(movies[99].id)
+  end
 end
