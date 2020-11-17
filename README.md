@@ -69,7 +69,7 @@ Response:
 
 ## Reflections
 - Genres:
-  - I would have liked to get genres within movie JSON objects to return as nested objects rather than a JSON string:
+  - I would have liked to get genres to return as nested objects rather than a JSON string, ie:
   ```
   "genres": [
       {
@@ -82,7 +82,7 @@ Response:
       }
   ]
   ```
-    - I had successfully achieved this but it was causing issues with the tests so I reverted back to the original JSON string being returns with the intention of coming back to this given more time
+    - I had successfully achieved this but it was causing issues with the tests so I reverted back to the raw JSON string format, with the intention of coming back to this given more time
     - Original approach: JSON parsing genres in `MovieSerializer`
       ```rb
       # app/serializers/movie_serializer.rb
@@ -102,7 +102,7 @@ Response:
         # ./spec/requests/api/v1/all_movies_request_spec.rb:30:in `block (2 levels) in <top (required)>'
       ```
 
-
+# Original Assignment Instructions
 ## Pre-requisites
 
 * An IDE or text editor of your choice
