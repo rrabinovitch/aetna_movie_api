@@ -18,13 +18,13 @@ Base URL: `localhost:3000/api/v1`
 
 ### `GET /movies`
 - Returns paginated list of movies; 50 per page
-- query params: 
+- query params:
   - `page` => specifies pagination; not specifying page defaults to page 1
   - Not yet implemented
     - `year` => filters movies by specified year sorted by descending chronological order of date
     - `genre` => filters movies by specified genre
 
-#### Example
+#### Examples
 Request: `GET localhost:3000/api/v1/movies?page=1`  
 Response:
   ```
@@ -78,6 +78,112 @@ Response:
     ]
   }
   ```
+Request: `GET localhost:3000/api/v1/movies?year=2005`  
+Response:
+  ```
+  {
+      "data": [
+          {
+              "id": "21705",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0795338",
+                  "title": "Barbie Diaries",
+                  "genres": "[{\"id\": 10751, \"name\": \"Family\"}, {\"id\": 16, \"name\": \"Animation\"}]",
+                  "releaseDate": "2005-12-31",
+                  "budget": "$0.00"
+              }
+          },
+          {
+              "id": "26147",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0453365",
+                  "title": "FC Venus",
+                  "genres": "[{\"id\": 35, \"name\": \"Comedy\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
+                  "releaseDate": "2005-12-30",
+                  "budget": "$2196531.00"
+              }
+          },
+          {
+              "id": "45035",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0492835",
+                  "title": "King and the Clown",
+                  "genres": "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 36, \"name\": \"History\"}, {\"id\": 53, \"name\": \"Thriller\"}]",
+                  "releaseDate": "2005-12-29",
+                  "budget": "$0.00"
+              }
+          },
+        ...
+          {
+              "id": "40017",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0499041",
+                  "title": "Kalyug",
+                  "genres": "[{\"id\": 10769, \"name\": \"Foreign\"}, {\"id\": 53, \"name\": \"Thriller\"}]",
+                  "releaseDate": "2005-12-09",
+                  "budget": "$0.00"
+              }
+          }
+      ]
+    }
+  ```
+  Request: `GET localhost:3000/api/v1/movies?year=2005&page=5`  
+  Response:
+    ```
+    {
+        "data": [
+            {
+                "id": "53935",
+                "type": "movie",
+                "attributes": {
+                    "imdbId": "tt0419922",
+                    "title": "Living 'til the End",
+                    "genres": "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
+                    "releaseDate": "2005-10-21",
+                    "budget": "$0.00"
+                }
+            },
+            {
+                "id": "59958",
+                "type": "movie",
+                "attributes": {
+                    "imdbId": "tt0487907",
+                    "title": "Gideon's Daughter",
+                    "genres": "[{\"id\": 18, \"name\": \"Drama\"}]",
+                    "releaseDate": "2005-10-21",
+                    "budget": "$0.00"
+                }
+            },
+            {
+                "id": "123858",
+                "type": "movie",
+                "attributes": {
+                    "imdbId": "tt0460926",
+                    "title": "Scab",
+                    "genres": "[]",
+                    "releaseDate": "2005-10-21",
+                    "budget": "$0.00"
+                }
+            },
+            ...
+            {
+                "id": "9621",
+                "type": "movie",
+                "attributes": {
+                    "imdbId": "tt0368709",
+                    "title": "Elizabethtown",
+                    "genres": "[{\"id\": 35, \"name\": \"Comedy\"}, {\"id\": 18, \"name\": \"Drama\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
+                    "releaseDate": "2005-10-06",
+                    "budget": "$57000000.00"
+                }
+            }
+        ]
+    }
+    ```
 
 ### `GET /movies/:id`
 - Returns details for the specified movie
@@ -128,7 +234,7 @@ Response:
   - There are a handful of gems I set up that I either did not need or did not end up being able to use
     - I usually like to use `simplecov` to support my testing, but did not prioritize setting it up right away
   - Having learned about the testing pyramid last week, I would have liked to spend more time considering what kind of testing to prioritize
-  
+
 
 
 # Original Assignment Instructions
