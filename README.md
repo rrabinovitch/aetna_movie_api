@@ -13,7 +13,7 @@ Base URL: `localhost:3000/api/v1`
   - not specifying the parameter defaults to page 1
 
 #### Example
-Request: `localhost:3000/api/v1/movies?page=1`
+Request: `localhost:3000/api/v1/movies?page=1`  
 Response:
   ```
   {
