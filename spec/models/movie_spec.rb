@@ -11,6 +11,5 @@ RSpec.describe Movie, type: :model do
 
   describe 'relationships' do
     # it { should have_many :ratings } - ratings db not yet configed
-    # consider many relationship w genres
   end
 end
