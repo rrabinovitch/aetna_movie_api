@@ -5,9 +5,102 @@
 ## Setup
 
 ## Endpoint Documentation
+Base URL: `localhost:3000/api/v1`
+
+### `GET /movies`
+- Returns paginated list of movies; 50 per page
+- `page` query params: specifies which page of movies will be returned
+  - not specifying the parameter defaults to page 1
+
+#### Example
+Request: `localhost:3000/api/v1/movies?page=1`
+Response:
+  ```
+  {
+    "data": [
+        {
+            "id": "2",
+            "type": "movie",
+            "attributes": {
+                "imdbId": "tt0094675",
+                "title": "Ariel",
+                "releaseDate": "1988-10-21",
+                "budget": "$0.00",
+                "genres": "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 80, \"name\": \"Crime\"}]"
+            }
+        },
+        {
+            "id": "3",
+            "type": "movie",
+            "attributes": {
+                "imdbId": "tt0092149",
+                "title": "Shadows in Paradise",
+                "releaseDate": "1986-10-16",
+                "budget": "$0.00",
+                "genres": "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 35, \"name\": \"Comedy\"}]"
+            }
+        },
+        {
+            "id": "5",
+            "type": "movie",
+            "attributes": {
+                "imdbId": "tt0113101",
+                "title": "Four Rooms",
+                "releaseDate": "1995-12-09",
+                "budget": "$4000000.00",
+                "genres": "[{\"id\": 80, \"name\": \"Crime\"}, {\"id\": 35, \"name\": \"Comedy\"}]"
+            }
+        },
+        {
+            "id": "6",
+            "type": "movie",
+            "attributes": {
+                "imdbId": "tt0107286",
+                "title": "Judgment Night",
+                "releaseDate": "1993-10-15",
+                "budget": "$0.00",
+                "genres": "[{\"id\": 28, \"name\": \"Action\"}, {\"id\": 53, \"name\": \"Thriller\"}, {\"id\": 80, \"name\": \"Crime\"}]"
+            }
+        },
+      ...
+    ]
+  }
+  ```
 
 ## Reflections
+- Genres:
+  - I would have liked to get genres within movie JSON objects to return as nested objects rather than a JSON string:
+  ```
+  "genres": [
+      {
+          "id": 18,
+          "name": "Drama"
+      },
+      {
+          "id": 80,
+          "name": "Crime"
+      }
+  ]
+  ```
+    - I had successfully achieved this but it was causing issues with the tests so I reverted back to the original JSON string being returns with the intention of coming back to this given more time
+    - Original approach: JSON parsing genres in `MovieSerializer`
+      ```rb
+      # app/serializers/movie_serializer.rb
+      attribute :genres #do |movie|
+        JSON.parse(movie.genres)
+      end
+      ```
+    - errors
+      ```
+      2) List All Movies Returns 50 movies per page
+        Failure/Error: JSON.parse(movie.genres)
 
+        JSON::ParserError:
+        416: unexpected token at '{:id=>18, :name=>"Drama"}, {:id=>80, :name=>"Crime"}]'
+        # ./app/serializers/movie_serializer.rb:7:in `block in <class:MovieSerializer>'
+        # ./app/controllers/api/v1/movies_controller.rb:5:in `index'
+        # ./spec/requests/api/v1/all_movies_request_spec.rb:30:in `block (2 levels) in <top (required)>'
+      ```
 
 
 ## Pre-requisites
