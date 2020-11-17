@@ -14,7 +14,7 @@ class MovieSerializer
   end
   attribute :runtime
 
-  # attribute :average_rating
+  # attribute :average_rating - could be a better fit as a relationship instead of an attribute
 
   attribute :genres #do |movie|
     # JSON.parse(movie.genres)
