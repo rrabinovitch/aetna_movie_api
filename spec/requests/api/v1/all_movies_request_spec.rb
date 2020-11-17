@@ -10,8 +10,7 @@ RSpec.describe 'List All Movies' do
 
     movies_json = JSON.parse(response.body, symbolize_names: true)
     expect(movies_json[:data].count).to eq(10)
-    expect(movies_json[:data][0][:attributes]).to have_key(:id)
-    expect(movies_json[:data][0][:attributes][:id]).to be_an(Integer)
+    expect(movies_json[:data][0]).to have_key(:id)
     expect(movies_json[:data][0][:attributes]).to have_key(:imdbId)
     expect(movies_json[:data][0][:attributes][:imdbId]).to be_a(String)
     expect(movies_json[:data][0][:attributes]).to have_key(:title)
@@ -34,8 +33,8 @@ RSpec.describe 'List All Movies' do
 
     movies_json = JSON.parse(response.body, symbolize_names: true)
     expect(movies_json[:data].count).to eq(50)
-    expect(movies_json[:data][0][:attributes][:id]).to eq(movies[0].id)
-    expect(movies_json[:data][49][:attributes][:id]).to eq(movies[49].id)
+    expect(movies_json[:data][0][:id]).to eq(movies[0].id.to_s)
+    expect(movies_json[:data][49][:id]).to eq(movies[49].id.to_s)
   end
 
   it 'Can accept "page" query params' do
@@ -47,7 +46,7 @@ RSpec.describe 'List All Movies' do
 
     movies_json = JSON.parse(response.body, symbolize_names: true)
     expect(movies_json[:data].count).to eq(50)
-    expect(movies_json[:data][0][:attributes][:id]).to eq(movies[50].id)
-    expect(movies_json[:data][49][:attributes][:id]).to eq(movies[99].id)
+    expect(movies_json[:data][0][:id]).to eq(movies[50].id.to_s)
+    expect(movies_json[:data][49][:id]).to eq(movies[99].id.to_s)
   end
 end
