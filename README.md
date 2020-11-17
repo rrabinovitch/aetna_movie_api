@@ -69,7 +69,7 @@ Response:
 
 ## Reflections
 - Genres:
-  - I would have liked to get genres to return as nested objects rather than a JSON string, ie:
+  - I would have liked to get the genres and production companies attributes to return as nested objects rather than a JSON string, ie:
   ```
   "genres": [
       {
@@ -82,7 +82,7 @@ Response:
       }
   ]
   ```
-    - I had successfully achieved this but it was causing issues with the tests so I reverted back to the raw JSON string format, with the intention of coming back to this given more time
+    - I had successfully achieved this but it was causing issues with the tests so I reverted back to the raw JSON string format, with the intention of coming back to this given more time. I wonder if there would be a difference if I had just built the response hash from within the controller rather than using a serializer?
     - Original approach: JSON parsing genres in `MovieSerializer`
       ```rb
       # app/serializers/movie_serializer.rb
