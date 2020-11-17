@@ -5,6 +5,7 @@
 - Rails 6.0
 - Ruby 2.5.3
 
+**Steps**
 1. `git clone git@github.com:rrabinovitch/aetna_movie_api.git`
 2. `cd aetna_movie_api`
 3. `bundle install`
