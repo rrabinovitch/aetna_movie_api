@@ -81,4 +81,16 @@ RSpec.describe 'Movies By Year' do
       expect(movie_data[:attributes][:releaseDate]).to include("1988")
     end
   end
+
+  it 'Returns a 400 / invalid request error if invalid year is passed in query params' do
+    get '/api/v1/movies?year=foo'
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+
+    error_json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(error_json[:error_message]).to eq("Specified year must be an integer over 0.")
+  end
+
+  # get '/api/v1/movies?year=0'
 end
