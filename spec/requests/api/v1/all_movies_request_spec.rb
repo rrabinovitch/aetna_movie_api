@@ -11,6 +11,8 @@ RSpec.describe 'List All Movies' do
     movies_json = JSON.parse(response.body, symbolize_names: true)
     expect(movies_json[:data].count).to eq(10)
     expect(movies_json[:data][0]).to have_key(:id)
+    expect(movies_json[:data][0]).to have_key(:type)
+    expect(movies_json[:data][0][:type]).to eq("movie")
     expect(movies_json[:data][0][:attributes]).to have_key(:imdbId)
     expect(movies_json[:data][0][:attributes][:imdbId]).to be_a(String)
     expect(movies_json[:data][0][:attributes]).to have_key(:title)
