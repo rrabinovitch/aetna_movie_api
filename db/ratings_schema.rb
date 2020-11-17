@@ -14,11 +14,11 @@ ActiveRecord::Schema.define(version: 2020_11_17_062451) do
 
   create_table "ratings", primary_key: "ratingId", force: :cascade do |t|
     t.integer "userId", null: false
-    t.integer "movieId_id", null: false
+    t.integer "movie_id", null: false
     t.float "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["movieId_id"], name: "index_ratings_on_movieId_id"
+    t.index ["movie_id"], name: "index_ratings_on_movie_id"
   end
 
 end
