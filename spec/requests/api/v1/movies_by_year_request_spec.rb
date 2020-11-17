@@ -52,18 +52,18 @@ RSpec.describe 'Movies By Year' do
     expect(movies_json[:data][3][:id]).to eq(@movie_4.id.to_s)
   end
 
-  # it 'Returns 50 movies per page' do
-  #   create_list(:movie, 75)
-  #
-  #   get '/api/v1/movies?year=1988'
-  #   expect(response).to be_successful
-  #   expect(response.content_type).to eq('application/json; charset=utf-8')
-  #
-  #   movies_json = JSON.parse(response.body, symbolize_names: true)
-  #   expect(movies_json[:data].count).to eq(50)
-  #
-  #   movies_json[:data].each do |movie_data|
-  #     expect(movie_data[:attributes][:releaseDate]).to include("1988")
-  #   end
-  # end
+  it 'Returns 50 movies per page' do
+    create_list(:movie, 75)
+  
+    get '/api/v1/movies?year=1988'
+    expect(response).to be_successful
+    expect(response.content_type).to eq('application/json; charset=utf-8')
+
+    movies_json = JSON.parse(response.body, symbolize_names: true)
+    expect(movies_json[:data].count).to eq(50)
+
+    movies_json[:data].each do |movie_data|
+      expect(movie_data[:attributes][:releaseDate]).to include("1988")
+    end
+  end
 end

@@ -4,7 +4,7 @@ class Api::V1::MoviesController < ApplicationController
       page = params[:page]
       movies = Movie.all.paginate(page: page, per_page: 50)
     elsif params[:year]
-      movies = Movie.where("movies.releaseDate LIKE ?", "%#{params[:year]}%").order(releaseDate: :desc)
+      movies = Movie.where("movies.releaseDate LIKE ?", "%#{params[:year]}%").order(releaseDate: :desc).paginate(page: 1, per_page: 50)
     else
       movies = Movie.all.paginate(page: 1, per_page: 50)
     end
