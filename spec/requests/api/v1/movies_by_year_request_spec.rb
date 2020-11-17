@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Movies By Year' do
   it 'Returns a list of all movies from a particular year' do
-    movie_1 = create(:movie, releaseDate: "1988-10-21")
-    movie_2 = create(:movie, releaseDate: "1988-10-27")
-    movie_3 = create(:movie, releaseDate: "1988-11-27")
-    movie_4 = create(:movie, releaseDate: "1988-12-01")
+    movie_1 = create(:movie, releaseDate: "1988-11-27")
+    movie_2 = create(:movie, releaseDate: "1988-12-01")
+    movie_3 = create(:movie, releaseDate: "1988-10-27")
+    movie_4 = create(:movie, releaseDate: "1988-10-21")
     movie_5 = create(:movie, releaseDate: "1990-02-19")
     movie_6 = create(:movie, releaseDate: "1990-04-29")
 
@@ -19,13 +19,10 @@ RSpec.describe 'Movies By Year' do
     movies_json[:data].each do |movie_data|
       expect(movie_data[:attributes][:releaseDate]).to include("1988")
     end
+  end
 
-    expect(movies_json[:data]).to include(movie_1)
-    expect(movies_json[:data]).to include(movie_2)
-    expect(movies_json[:data]).to include(movie_3)
-    expect(movies_json[:data]).to include(movie_4)
-    expect(movies_json[:data]).to not_include(movie_5)
-    expect(movies_json[:data]).to not_include(movie_6)
+  it 'Returns the filtered movies in descending chronological year order' do
+
   end
 
   # it 'Returns 50 movies per page' do
