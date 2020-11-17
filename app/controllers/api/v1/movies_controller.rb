@@ -1,7 +1,13 @@
 class Api::V1::MoviesController < ApplicationController
   def index
-    page = params[:page]
-    movies = Movie.all.paginate(page: page, per_page: 50)
+    if params[:page]
+      page = params[:page]
+      movies = Movie.all.paginate(page: page, per_page: 50)
+    elsif params[:year]
+      movies = Movie.where("movies.releaseDate LIKE ?", "%#{params[:year]}%")
+
+      binding.pry
+    end
     render json: MovieSerializer.new(movies, { fields: { movie: [:imdbId, :title, :genres, :releaseDate, :budget] } })
   end
 

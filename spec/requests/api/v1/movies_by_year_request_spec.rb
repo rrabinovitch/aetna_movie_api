@@ -14,7 +14,7 @@ RSpec.describe 'Movies By Year' do
     expect(response.content_type).to eq('application/json; charset=utf-8')
 
     movies_json = JSON.parse(response.body, symbolize_names: true)
-    expect(movie_json[:data].count).to eq(4)
+    expect(movies_json[:data].count).to eq(4)
 
     movies_json[:data].each do |movie_data|
       expect(movie_data[:attributes][:releaseDate]).to include("1988")
