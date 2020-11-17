@@ -54,7 +54,7 @@ RSpec.describe 'Movies By Year' do
 
   it 'Returns 50 movies per page' do
     create_list(:movie, 75)
-  
+
     get '/api/v1/movies?year=1988'
     expect(response).to be_successful
     expect(response.content_type).to eq('application/json; charset=utf-8')
