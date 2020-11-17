@@ -5,6 +5,16 @@
 ## Setup
 
 ## Endpoint Documentation
+Base URL: `localhost:3000/api/v1`
+
+### `GET /movies`
+- Returns paginated list of movies; 50 per page
+- `page` query params: specifies which page of movies will be returned
+  - not specifying the parameter defaults to page 1
+
+#### Example
+Request:
+Response:
 
 ## Reflections
 
