@@ -21,7 +21,7 @@ RSpec.describe 'Movie Details' do
     expect(movie_json[:data][:attributes][:title]).to eq(movie.title)
     expect(movie_json[:data][:attributes]).to have_key(:description)
     expect(movie_json[:data][:attributes][:description]).to be_a(String)
-    expect(movie_json[:data][:attributes][:description]).to eq(movie.overview)
+    expect(movie_json[:data][:attributes][:description]).to eq(movie.description)
     expect(movie_json[:data][:attributes]).to have_key(:releaseDate)
     expect(movie_json[:data][:attributes][:releaseDate]).to be_a(String)
     expect(movie_json[:data][:attributes][:releaseDate]).to eq(movie.releaseDate)
@@ -31,15 +31,15 @@ RSpec.describe 'Movie Details' do
     expect(movie_json[:data][:attributes]).to have_key(:runtime)
     expect(movie_json[:data][:attributes][:runtime]).to be_an(Integer)
     expect(movie_json[:data][:attributes][:runtime]).to eq(movie.runtime)
-    # expect(movie_json[:data][:attributes]).to have_key(:average_rating)
-    # expect(movie_json[:data][:attributes][:average_rating]).to be_a(Float)
+    expect(movie_json[:data][:attributes]).to have_key(:average_rating)
+    # expect(movie_json[:data][:attributes][:average_rating]).to be_a()
     # write expectation re: what avg rating should eq - will need to create mock ratings
     expect(movie_json[:data][:attributes]).to have_key(:genres)
     expect(movie_json[:data][:attributes][:genres]).to be_a(String)
     expect(movie_json[:data][:attributes][:genres]).to eq(movie.genres)
     expect(movie_json[:data][:attributes]).to have_key(:originalLanguage)
     expect(movie_json[:data][:attributes][:originalLanguage]).to eq(movie.language)
-    expect(movie_json[:data][:attributes]).to have_key(:productionCompanies)
+    expect(movie_json[:data][:attributes]).to have_key(:productionXompanies)
     expect(movie_json[:data][:attributes][:productionCompanies]).to eq(movie.productionCompanies)
   end
 end
