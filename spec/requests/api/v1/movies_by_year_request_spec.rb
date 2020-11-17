@@ -19,6 +19,22 @@ RSpec.describe 'Movies By Year' do
     movies_json[:data].each do |movie_data|
       expect(movie_data[:attributes][:releaseDate]).to include("1988")
     end
+
+    expect(movies_json[:data][0]).to have_key(:id)
+    expect(movies_json[:data][0]).to have_key(:type)
+    expect(movies_json[:data][0][:type]).to eq("movie")
+    # binding.pry
+    expect(movies_json[:data][0][:attributes]).to have_key(:imdbId)
+    expect(movies_json[:data][0][:attributes][:imdbId]).to be_a(String)
+    expect(movies_json[:data][0][:attributes]).to have_key(:title)
+    expect(movies_json[:data][0][:attributes][:title]).to be_a(String)
+    expect(movies_json[:data][0][:attributes]).to have_key(:genres)
+    expect(movies_json[:data][0][:attributes][:genres]).to be_a(String)
+    expect(movies_json[:data][0][:attributes]).to have_key(:releaseDate)
+    expect(movies_json[:data][0][:attributes][:releaseDate]).to be_a(String)
+    expect(movies_json[:data][0][:attributes]).to have_key(:budget)
+    expect(movies_json[:data][0][:attributes][:budget]).to be_a(String)
+    expect(movies_json[:data][0][:attributes][:budget]).to include("$")
   end
 
   it 'Returns the filtered movies in descending chronological year order' do
