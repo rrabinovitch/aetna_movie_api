@@ -13,7 +13,7 @@ Base URL: `localhost:3000/api/v1`
   - not specifying the parameter defaults to page 1
 
 #### Example
-Request: `localhost:3000/api/v1/movies?page=1`  
+Request: `GET localhost:3000/api/v1/movies?page=1`  
 Response:
   ```
   {
@@ -64,6 +64,32 @@ Response:
         },
       ...
     ]
+  }
+  ```
+
+### `GET /movies/:id`
+- Returns details for the specified movie
+
+#### Example
+Request: `GET localhost:3000/api/v1/movies/11`  
+Response:
+  ```
+  {
+      "data": {
+          "id": "11",
+          "type": "movie",
+          "attributes": {
+              "imdbId": "tt0076759",
+              "title": "Star Wars",
+              "description": "Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire.",
+              "releaseDate": "1977-05-25",
+              "budget": "$11000000.00",
+              "runtime": 121,
+              "genres": "[{\"id\": 12, \"name\": \"Adventure\"}, {\"id\": 28, \"name\": \"Action\"}, {\"id\": 878, \"name\": \"Science Fiction\"}]",
+              "originalLanguage": null,
+              "productionCompanies": "[{\"name\": \"Lucasfilm\", \"id\": 1}, {\"name\": \"Twentieth Century Fox Film Corporation\", \"id\": 306}]"
+          }
+      }
   }
   ```
 
