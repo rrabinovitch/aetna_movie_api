@@ -1,16 +1,27 @@
 # Movie API Code Test
 
-## About
-
 ## Setup
+**Version Requirements**
+- Rails 6.0
+- Ruby 2.5.3
+
+1. `git clone git@github.com:rrabinovitch/aetna_movie_api.git`
+2. `cd aetna_movie_api`
+3. `bundle install`
+4. `rails db:{create,migrate` - _note that as of 11/17/20, running this command from `main` will only set up the movies database and table and not the ratings ones_
+5. run tests: `bundle exec rspec`
+6. run `rails s` and explore the endpoints documented below
 
 ## Endpoint Documentation
 Base URL: `localhost:3000/api/v1`
 
 ### `GET /movies`
 - Returns paginated list of movies; 50 per page
-- `page` query params: specifies which page of movies will be returned
-  - not specifying the parameter defaults to page 1
+- query params: 
+  - `page` => specifies pagination; not specifying page defaults to page 1
+  - Not yet implemented
+    - `year` => filters movies by specified year sorted by descending chronological order of date
+    - `genre` => filters movies by specified genre
 
 #### Example
 Request: `GET localhost:3000/api/v1/movies?page=1`  
@@ -94,39 +105,30 @@ Response:
   ```
 
 ## Reflections
-- Genres:
-  - I would have liked to get the genres and production companies attributes to return as nested objects rather than a JSON string, ie:
-  ```
-  "genres": [
-      {
-          "id": 18,
-          "name": "Drama"
-      },
-      {
-          "id": 80,
-          "name": "Crime"
-      }
-  ]
-  ```
-    - I had successfully achieved this but it was causing issues with the tests so I reverted back to the raw JSON string format, with the intention of coming back to this given more time. I wonder if there would be a difference if I had just built the response hash from within the controller rather than using a serializer?
-    - Original approach: JSON parsing genres in `MovieSerializer`
-      ```rb
-      # app/serializers/movie_serializer.rb
-      attribute :genres #do |movie|
-        JSON.parse(movie.genres)
-      end
-      ```
-    - errors
-      ```
-      2) List All Movies Returns 50 movies per page
-        Failure/Error: JSON.parse(movie.genres)
+- Strengths
+  - [Documenting my process](https://gist.github.com/rrabinovitch/3c83ef68df4538d1b6402216a3b5aa57) and thinking as I ran into errors or points at which I had to make a design decision
+  - Use of [project board](https://github.com/rrabinovitch/aetna_movie_api/projects/1)
+    - I broke down the assignment into concrete components and issues to tackle one at a time
+    - Tracked sad paths and bugs that I would come back to given time
+  - Writing documentation as I progressed, rather than needing to write it all in one go at the end; helped keep perspective of the overall purpose of this API, outline of the endpoints and how different user stories might relate to each other, and allowed me to catch early mistakes in how I was building responses that I could easily and immediately fix (again rather than needing to catch them at the end - or even rather than not catching them at all at the end)
+    - It was especially helpful/important that I was checking my responses in Postman as I built out and after I completed an endpoint - this was what allowed me to catch early on that I was running into the migration errors and datatype issues that arose over the weekend, even though my tests were passing just fine
+- Areas for improvement / what I'd keep working on given more time
+  - Squash commits to produce cleaner commit history
+  - Figure out a way to have `genres` return as objects within movies responses ([see issue #10](https://github.com/rrabinovitch/aetna_movie_api/issues/10))
+    - I tried working on this for about 30 min but elected to move on so other components of the assignment wouldn't be hindered in their progression
+  - Configuring `ratings.db`
+    - I'm disappointed that I wasn't able to successfully integrate the use of the second database; however, given that this is a design pattern I was not previously familiar with, I feel good about having researched this approach, found and followed documentation, and tried several tutorials. I was able to do the basic configuration in the [`chore/ratings_db_setup`](https://github.com/rrabinovitch/aetna_movie_api/commits/chore/ratings_db_setup) branch but hit a wall when it came to setting up the model associations/relationships. At that point, I had spent well over the recommended 3-4 hours on this challenge and decided to take a step back and instead prioritize reflecting on how this assignment went.
+    - Worth noting is that it seems "joining across databases" is not possible in the version of Rails that I use: documentation [here](https://guides.rubyonrails.org/active_record_multiple_databases.html#joining-across-databases)
+    - Given this limitation, with more time I would have looked into potentially building a rake task (like in [this](https://github.com/rrabinovitch/rails_engine_rr/blob/master/lib/tasks/seed_from_csv.rake) project) in order to seed the records from the two tables into one database as a final resort - though I understand part of the core expectations of this assignment was to use two separate databases.
+  - In a non-timeboxed assignment, I likely would have implemented CI/CI, either with TravisCI (what I have most experience using) or CircleCI (which I used for my third quarter Turing final, [Sweater Weather](https://github.com/rrabinovitch/sweater_weather))
+  - After having already implemented my use of the `fast_jsonapi` gem, I realized that the gem is no longer maintained
+    - Had I realized this sooner / with more time, I would have considered an alternative approach to serializing the responses
+  - The `movies#index` endpoint would ideally include the specified page number in responses
+  - There are a handful of gems I set up that I either did not need or did not end up being able to use
+    - I usually like to use `simplecov` to support my testing, but did not prioritize setting it up right away
+  - Having learned about the testing pyramid last week, I would have liked to spend more time considering what kind of testing to prioritize
+  
 
-        JSON::ParserError:
-        416: unexpected token at '{:id=>18, :name=>"Drama"}, {:id=>80, :name=>"Crime"}]'
-        # ./app/serializers/movie_serializer.rb:7:in `block in <class:MovieSerializer>'
-        # ./app/controllers/api/v1/movies_controller.rb:5:in `index'
-        # ./spec/requests/api/v1/all_movies_request_spec.rb:30:in `block (2 levels) in <top (required)>'
-      ```
 
 # Original Assignment Instructions
 ## Pre-requisites
