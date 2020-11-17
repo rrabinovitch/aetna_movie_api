@@ -10,22 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_062421) do
+ActiveRecord::Schema.define(version: 2020_11_17_062451) do
 
-  create_table "movies", primary_key: "movieId", force: :cascade do |t|
-    t.text "imdbId", null: false
-    t.text "title", null: false
-    t.text "overview"
-    t.text "productionCompanies"
-    t.text "releaseDate"
-    t.integer "budget"
-    t.integer "revenue"
-    t.integer "runtime"
-    t.text "language"
-    t.text "genres"
-    t.text "status"
+  create_table "ratings", primary_key: "ratingId", force: :cascade do |t|
+    t.integer "userId", null: false
+    t.integer "movieId_id", null: false
+    t.float "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["movieId_id"], name: "index_ratings_on_movieId_id"
   end
 
 end
