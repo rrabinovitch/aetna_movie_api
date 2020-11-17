@@ -131,59 +131,59 @@ Response:
       ]
     }
   ```
-  Request: `GET localhost:3000/api/v1/movies?year=2005&page=5`  
-  Response:
-    ```
-    {
-        "data": [
-            {
-                "id": "53935",
-                "type": "movie",
-                "attributes": {
-                    "imdbId": "tt0419922",
-                    "title": "Living 'til the End",
-                    "genres": "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
-                    "releaseDate": "2005-10-21",
-                    "budget": "$0.00"
-                }
-            },
-            {
-                "id": "59958",
-                "type": "movie",
-                "attributes": {
-                    "imdbId": "tt0487907",
-                    "title": "Gideon's Daughter",
-                    "genres": "[{\"id\": 18, \"name\": \"Drama\"}]",
-                    "releaseDate": "2005-10-21",
-                    "budget": "$0.00"
-                }
-            },
-            {
-                "id": "123858",
-                "type": "movie",
-                "attributes": {
-                    "imdbId": "tt0460926",
-                    "title": "Scab",
-                    "genres": "[]",
-                    "releaseDate": "2005-10-21",
-                    "budget": "$0.00"
-                }
-            },
-            ...
-            {
-                "id": "9621",
-                "type": "movie",
-                "attributes": {
-                    "imdbId": "tt0368709",
-                    "title": "Elizabethtown",
-                    "genres": "[{\"id\": 35, \"name\": \"Comedy\"}, {\"id\": 18, \"name\": \"Drama\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
-                    "releaseDate": "2005-10-06",
-                    "budget": "$57000000.00"
-                }
-            }
-        ]
-    }
-    ```
+Request: `GET localhost:3000/api/v1/movies?year=2005&page=5`  
+Response: 
+  ```
+   {
+      "data": [
+          {
+              "id": "53935",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0419922",
+                  "title": "Living 'til the End",
+                  "genres": "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
+                  "releaseDate": "2005-10-21",
+                  "budget": "$0.00"
+              }
+          },
+          {
+              "id": "59958",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0487907",
+                  "title": "Gideon's Daughter",
+                  "genres": "[{\"id\": 18, \"name\": \"Drama\"}]",
+                  "releaseDate": "2005-10-21",
+                  "budget": "$0.00"
+              }
+          },
+          {
+              "id": "123858",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0460926",
+                  "title": "Scab",
+                  "genres": "[]",
+                  "releaseDate": "2005-10-21",
+                  "budget": "$0.00"
+              }
+          },
+          ...
+                  {
+              "id": "9621",
+              "type": "movie",
+              "attributes": {
+                  "imdbId": "tt0368709",
+                  "title": "Elizabethtown",
+                  "genres": "[{\"id\": 35, \"name\": \"Comedy\"}, {\"id\": 18, \"name\": \"Drama\"}, {\"id\": 10749, \"name\": \"Romance\"}]",
+                  "releaseDate": "2005-10-06",
+                  "budget": "$57000000.00"
+              }
+          }
+      ]
+  }
+  ```
 
 ### `GET /movies/:id`
 - Returns details for the specified movie
@@ -213,12 +213,13 @@ Response:
 
 ## Reflections
 - Strengths
-  - [Documenting my process](https://gist.github.com/rrabinovitch/3c83ef68df4538d1b6402216a3b5aa57) and thinking as I ran into errors or points at which I had to make a design decision
+  - [Documenting my process](https://gist.github.com/rrabinovitch/3c83ef68df4538d1b6402216a3b5aa57) as I ran into errors or points at which I had to make design decisions
   - Use of [project board](https://github.com/rrabinovitch/aetna_movie_api/projects/1)
     - I broke down the assignment into concrete components and issues to tackle one at a time
     - Tracked sad paths and bugs that I would come back to given time
   - Writing documentation as I progressed, rather than needing to write it all in one go at the end; helped keep perspective of the overall purpose of this API, outline of the endpoints and how different user stories might relate to each other, and allowed me to catch early mistakes in how I was building responses that I could easily and immediately fix (again rather than needing to catch them at the end - or even rather than not catching them at all at the end)
     - It was especially helpful/important that I was checking my responses in Postman as I built out and after I completed an endpoint - this was what allowed me to catch early on that I was running into the migration errors and datatype issues that arose over the weekend, even though my tests were passing just fine
+  - Testing: using TDD as much as possible throughout the development process
 - Areas for improvement / what I'd keep working on given more time
   - Squash commits to produce cleaner commit history
   - Figure out a way to have `genres` return as objects within movies responses ([see issue #10](https://github.com/rrabinovitch/aetna_movie_api/issues/10))
@@ -234,6 +235,7 @@ Response:
   - There are a handful of gems I set up that I either did not need or did not end up being able to use
     - I usually like to use `simplecov` to support my testing, but did not prioritize setting it up right away
   - Having learned about the testing pyramid last week, I would have liked to spend more time considering what kind of testing to prioritize
+  - Randomization of mock test object attributes in order to make testing a bit more robust - would probably have used the `faker` gem
 
 
 
