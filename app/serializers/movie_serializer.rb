@@ -1,6 +1,6 @@
 class MovieSerializer
   include FastJsonapi::ObjectSerializer
-  binding.pry
+
   attributes :imdbId, :title, :releaseDate, :budget
 
   attribute :genres #do |movie|

@@ -16,12 +16,12 @@ RSpec.describe 'List All Movies' do
     expect(movies_json[:data][0][:attributes]).to have_key(:title)
     expect(movies_json[:data][0][:attributes][:title]).to be_a(String)
     expect(movies_json[:data][0][:attributes]).to have_key(:genres)
-    # expect(movies_json[:data][0][:attributes][:genres]).to be_a(...) --- string? array?
-      # array of genre names?
+    expect(movies_json[:data][0][:attributes][:genres]).to be_a(String)
     expect(movies_json[:data][0][:attributes]).to have_key(:releaseDate)
     expect(movies_json[:data][0][:attributes][:releaseDate]).to be_a(String)
     expect(movies_json[:data][0][:attributes]).to have_key(:budget)
-    expect(movies_json[:data][0][:attributes][:budget]).to be_a(String) # how to test that budget is displayed in dollars?
+    expect(movies_json[:data][0][:attributes][:budget]).to be_a(String)
+    expect(movies_json[:data][0][:attributes][:budget]).to include("$")
   end
 
   it 'Returns 50 movies per page' do
