@@ -6,6 +6,7 @@ class Api::V1::MoviesController < ApplicationController
       movies = Movie.all.paginate(page: params[:page], per_page: 50)
     end
     render json: MovieSerializer.new(movies, { fields: { movie: [:imdbId, :title, :genres, :releaseDate, :budget] } })
+    # save per_page value as var at top to minimize # of changes potentially needed (same w params[:page])
   end
 
   def show
