@@ -1,18 +1,14 @@
 class MovieSerializer
   include FastJsonapi::ObjectSerializer
 
-  attribute :imdbId
-
-  attribute :title
+  attribute :imdbId, :title, :releaseDate, :runtime, :productionCompanies
 
   attribute :description, &:overview
-
-  attribute :releaseDate
+  attribute :originalLanguage, &:language
 
   attribute :budget do |movie|
     "$#{movie.budget}.00"
   end
-  attribute :runtime
 
   # attribute :average_rating - could be a better fit as a relationship instead of an attribute
 
@@ -20,7 +16,4 @@ class MovieSerializer
     # JSON.parse(movie.genres)
   # end
 
-  attribute :originalLanguage, &:language
-
-  attribute :productionCompanies
 end

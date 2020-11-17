@@ -7,6 +7,6 @@ class Api::V1::MoviesController < ApplicationController
 
   def show
     movie = Movie.find(params[:id])
-    render json: MovieSerializer.new(movie)
+    render json: MovieSerializer.new(movie, { fields: { movie: [:imdbId, :title, :description, :releaseDate, :budget, :runtime, :genres, :originalLanguage, :productionCompanies] } })
   end
 end
