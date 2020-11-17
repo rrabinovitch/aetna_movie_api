@@ -1,4 +1,4 @@
-class MovieSerializer
+class MoviesSerializer
   include FastJsonapi::ObjectSerializer
 
   attributes :imdbId, :title, :releaseDate, :budget
