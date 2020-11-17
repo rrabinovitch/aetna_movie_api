@@ -69,7 +69,7 @@ Response:
 
 ## Reflections
 - Genres:
-  - I would have liked to get genres to return as nested objects rather than a JSON string, ie:
+  - I would have liked to get the genres and production companies attributes to return as nested objects rather than a JSON string, ie:
   ```
   "genres": [
       {
