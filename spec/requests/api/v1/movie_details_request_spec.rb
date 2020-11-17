@@ -37,9 +37,9 @@ RSpec.describe 'Movie Details' do
     expect(movie_json[:data][:attributes]).to have_key(:genres)
     expect(movie_json[:data][:attributes][:genres]).to be_a(String)
     expect(movie_json[:data][:attributes][:genres]).to eq(movie.genres)
-    expect(movie_json[:data][:attributes]).to have_key(:original_language)
-    expect(movie_json[:data][:attributes][:original_language]).to eq(movie.language)
-    expect(movie_json[:data][:attributes]).to have_key(:production_companies)
-    expect(movie_json[:data][:attributes][:production_companies]).to eq(movie.productionCompanies)
+    expect(movie_json[:data][:attributes]).to have_key(:originalLanguage)
+    expect(movie_json[:data][:attributes][:originalLanguage]).to eq(movie.language)
+    expect(movie_json[:data][:attributes]).to have_key(:productionXompanies)
+    expect(movie_json[:data][:attributes][:productionCompanies]).to eq(movie.productionCompanies)
   end
 end
