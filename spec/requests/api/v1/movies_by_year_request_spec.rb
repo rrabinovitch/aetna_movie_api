@@ -66,4 +66,19 @@ RSpec.describe 'Movies By Year' do
       expect(movie_data[:attributes][:releaseDate]).to include("1988")
     end
   end
+
+  it 'Accepts page as well as year query params' do
+    create_list(:movie, 75)
+
+    get '/api/v1/movies?year=1988&page=2'
+    expect(response).to be_successful
+    expect(response.content_type).to eq('application/json; charset=utf-8')
+
+    movies_json = JSON.parse(response.body, symbolize_names: true)
+    expect(movies_json[:data].count).to eq(29)
+
+    movies_json[:data].each do |movie_data|
+      expect(movie_data[:attributes][:releaseDate]).to include("1988")
+    end
+  end
 end
