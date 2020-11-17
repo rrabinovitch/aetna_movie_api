@@ -1,5 +1,7 @@
 class Api::V1::MoviesController < ApplicationController
   def index
-    render json: MovieSerializer.new(Movie.all)
+    page = params[:page]
+    movies = Movie.all.paginate(page: page, per_page: 50)
+    render json: MovieSerializer.new(movies)
   end
 end
