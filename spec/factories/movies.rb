@@ -1,15 +1,10 @@
 FactoryBot.define do
   factory :movie do
-    imdbId { "MyText" }
+    imdbId { "tt0094675" }
     title { "Movie Title" }
-    overview { "MyText" }
-    productionCompanies { "MyText" }
-    releaseDate { "MyText" }
-    budget { 1 }
-    revenue { 1 }
-    runtime { 1 }
-    language { "MyText" }
-    genres { "MyText" }
-    status { "MyText" }
+    releaseDate { "1988-10-21" }
+    budget { 1000000 }
+    runtime { 105 }
+    genres { [{id: 18, name: "Drama"}, {id: 80, name: "Crime"}] }
   end
 end
