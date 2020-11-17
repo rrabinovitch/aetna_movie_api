@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_062421) do
+ActiveRecord::Schema.define(version: 0) do
 
   create_table "movies", primary_key: "movieId", force: :cascade do |t|
     t.text "imdbId", null: false
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(version: 2020_11_17_062421) do
     t.text "language"
     t.text "genres"
     t.text "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
