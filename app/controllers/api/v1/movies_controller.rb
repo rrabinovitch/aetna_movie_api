@@ -1,13 +1,12 @@
 class Api::V1::MoviesController < ApplicationController
   def index
-    if params[:year]
-      # check validity of year query params
-      # if not valid => render error message
-      if params[:year].to_i <= 0 #.class == Integer && params[:year] > 0
+    year = params[:year]
+    if year
+      if year.to_i <= 0
         render json: { status: 400, error_message: "Specified year must be an integer over 0." }, status: :bad_request
         return
       end
-      movies = Movie.where("movies.releaseDate LIKE ?", "%#{params[:year]}%").order(releaseDate: :desc).paginate(page: params[:page], per_page: 50)
+      movies = Movie.filter_movies_by_year(year).paginate(page: params[:page], per_page: 50) #where("movies.releaseDate LIKE ?", "%#{params[:year]}%").order(releaseDate: :desc).paginate(page: params[:page], per_page: 50)
     else
       movies = Movie.all.paginate(page: params[:page], per_page: 50)
     end
