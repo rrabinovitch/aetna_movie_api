@@ -9,7 +9,7 @@
 1. `git clone git@github.com:rrabinovitch/aetna_movie_api.git`
 2. `cd aetna_movie_api`
 3. `bundle install`
-4. `rails db:{create,migrate` - _note that as of 11/17/20, running this command from `main` will only set up the movies database and table and not the ratings ones_
+4. `rails db:{create,migrate}` - _note that as of 11/17/20, running this command from `main` will only set up the `movies` database and table and not the `ratings` ones_
 5. run tests: `bundle exec rspec`
 6. run `rails s` and explore the endpoints documented below
 
